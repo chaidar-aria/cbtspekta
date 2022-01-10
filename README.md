@@ -4,7 +4,7 @@ Computer Based Test Sistem Pencatatan Keuangan dan Keanggotaan Ekstrakurikuler S
 
 ## Developed By
 
-Chaidar Aria / Alumni SMA Negeri 1 Mejayan
+SMA NEGERI 1 MEJAYAN
 
 ## Fitur
 1. Halaman Admin
