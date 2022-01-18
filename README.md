@@ -1,6 +1,7 @@
 # CBT SPEKTA
 
-Computer Based Test Sistem Pencatatan Keuangan dan Keanggotaan Ekstrakurikuler SMA Negeri 1 Mejayan
+Computer Based Test 
+Sistem Pencatatan Keuangan dan Keanggotaan Ekstrakurikuler SMA Negeri 1 Mejayan
 
 ## Developed By
 
