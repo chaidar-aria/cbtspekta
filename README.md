@@ -16,7 +16,7 @@ SMA NEGERI 1 MEJAYAN
 
 ## Screenshot Login CBT SPEKTA
 ![Login CBT SPEKTA](https://i.ibb.co/tsVyBVq/Screenshot-1769.png)
-```
+
 
 Aplikasi ini milik SMA Negeri 1 Mejayan
 
