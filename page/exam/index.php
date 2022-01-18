@@ -13,6 +13,12 @@ if ($_SESSION['level'] == "") {
 
 $username = $_SESSION['username'];
 
+$sql = "SELECT * FROM tb_users_cbt WHERE username = '$username'";
+$res = $conn->query($sql);
+while ($d = $res->fetch_array()) {
+    $tesid = $d['test_id'];
+}
+
 $query = "SELECT * FROM tb_users_cbt
             INNER JOIN tb_users ON tb_users.id_users = tb_users_cbt.id_users
             INNER JOIN tb_users_address ON tb_users.id_users = tb_users_address.id_users
@@ -20,7 +26,7 @@ $query = "SELECT * FROM tb_users_cbt
             INNER JOIN tb_users_status ON tb_users.id_users = tb_users_status.id_users
             INNER JOIN tb_test ON tb_users_cbt.test_id = tb_test.test_id
             INNER JOIN tb_cbt_time ON tb_test.test_id = tb_cbt_time.test_id
-            WHERE tb_users_cbt.username = '$username'";
+            WHERE tb_users_cbt.username = '$username' AND tb_users_cbt.test_id = '$tesid'";
 $result = $conn->query($query);
 
 while ($row = $result->fetch_assoc()) {
@@ -56,6 +62,9 @@ while ($row = $result->fetch_assoc()) {
                             </td>
                             <td><?php echo $row['cbt_timer'] . ' menit'; ?></td>
                             <td class="text-center">
+                                <?php if (date("Y-m-d") < $row['cbt_date_start']) { ?>
+                                <div class="badge badge-danger">BELUM DIMULAI</div>
+                                <?php } else if (date("Y-m-d") >= $row['cbt_date_start'] && date("Y-m-d") <= $row['cbt_date_end']) { ?>
                                 <?php if ($row['exam_status'] == 'TERDAFTAR') { ?>
                                 <span class="badge bg-info text-white">Terdaftar</span>
                                 <?php } elseif ($row['exam_status'] == 'FINISH') { ?>
@@ -65,12 +74,21 @@ while ($row = $result->fetch_assoc()) {
                                 <?php } elseif ($row['exam_status'] == 'VIOLATION') { ?>
                                 <span class="badge bg-danger text-white">Pelanggaran</span>
                                 <?php } ?>
+                                <?php } else { ?>
+                                <div class="badge badge-success">UJIAN TELAH SELESAI</div>
+                                <?php } ?>
                             </td>
                             <td>
+                                <?php if (date("Y-m-d") >= $row['cbt_date_start'] && date("Y-m-d") <= $row['cbt_date_end']) { ?>
                                 <a class="btn-shadow p-1 btn btn-danger btn-sm text-white" role="button" href="
                                     <?php
-                                    echo $urlConfirm . '?tes_id=' . $row['test_id'] ?>" id="startExam">Mulai
+                                        echo $urlConfirm . '?tes_id=' . $row['test_id'] ?>" id="startExam">Mulai
                                     Kerjakan</a>
+                                <?php } else { ?>
+                                <a class="btn-shadow p-1 btn btn-danger btn-sm text-white" role="button"
+                                    href="javascript:void(0);" onclick="sudahselesai()">Mulai
+                                    Kerjakan</a>
+                                <?php } ?>
                             </td>
                         </tbody>
                     </table>
@@ -81,6 +99,7 @@ while ($row = $result->fetch_assoc()) {
 </div>
 <?php }
 include '../template/script.php';
+
 if (isset($_GET['mes'])) {
     if ($_GET['mes'] == 'token') {
     ?>
@@ -96,9 +115,20 @@ Swal.fire({
 </script>
 <?php
     }
+    ?>
+<?php
 }
-?>
 
+?>
+<script>
+function sudahselesai() {
+    Swal.fire({
+        icon: 'warning',
+        title: 'UJIAN TELAH SELESAI',
+        text: 'Anda tidak dapat mengakses ujian ini karena jadwal ujian telah terlewat. Jika merasa belum mengikuti ujian silahkan untuk menghubungi panitia seleksi',
+    });
+}
+</script>
 </body>
 
 </html>

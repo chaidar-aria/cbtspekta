@@ -320,106 +320,72 @@ while ($row = $result->fetch_assoc()) {
             text: 'Anda meninggalkan ujian \n segala pelanggaran akan dilaporkan',
         })
     }
-    // $(document).ready(function() {
-    //     /** Membuat Waktu Mulai Hitung Mundur Dengan 
-    //      * var detik;
-    //      * var menit;
-    //      * var jam;
-    //      */
-    //     var detik = <?= $detik; ?>;
-    //     var menit = <?= $menit; ?>;
-    //     var jam = <?= $jam; ?>;
+    $(document).ready(function() {
+        /** Membuat Waktu Mulai Hitung Mundur Dengan 
+         * var detik;
+         * var menit;
+         * var jam;
+         */
+        var detik = <?= $detik; ?>;
+        var menit = <?= $menit; ?>;
+        var jam = <?= $jam; ?>;
 
-    //     /**
-    //      * Membuat function hitung() sebagai Penghitungan Waktu
-    //      */
-    //     function hitung() {
-    //         /** setTimout(hitung, 1000) digunakan untuk 
-    //          * mengulang atau merefresh halaman selama 1000 (1 detik) 
-    //          */
-    //         setTimeout(hitung, 1000);
+        /**
+         * Membuat function hitung() sebagai Penghitungan Waktu
+         */
+        function hitung() {
+            /** setTimout(hitung, 1000) digunakan untuk 
+             * mengulang atau merefresh halaman selama 1000 (1 detik) 
+             */
+            setTimeout(hitung, 1000);
 
-    //         /** Jika waktu kurang dari 1 menit maka Timer akan berubah menjadi warna merah */
-    //         if (menit < 1 && jam == 0) {
-    //             var peringatan = 'style="color:red"';
-    //         };
+            /** Jika waktu kurang dari 1 menit maka Timer akan berubah menjadi warna merah */
+            if (menit < 1 && jam == 0) {
+                var peringatan = 'style="color:red"';
+            };
 
-    //         /** Menampilkan Waktu Timer pada Tag #Timer di HTML yang tersedia */
-    //         $('#clock').html(
-    //             '<p align="center"' + peringatan + '>' + jam + ' : ' + menit +
-    //             ' : ' + detik + '</p><hr>'
-    //         );
+            /** Menampilkan Waktu Timer pada Tag #Timer di HTML yang tersedia */
+            $('#clock').html(
+                '<p align="center"' + peringatan + '>' + jam + ' : ' + menit +
+                ' : ' + detik + '</p><hr>'
+            );
 
-    //         /** Melakukan Hitung Mundur dengan Mengurangi variabel detik - 1 */
-    //         detik--;
+            /** Melakukan Hitung Mundur dengan Mengurangi variabel detik - 1 */
+            detik--;
 
-    //         /** Jika var detik < 0
-    //          * var detik akan dikembalikan ke 59
-    //          * Menit akan Berkurang 1
-    //          */
-    //         if (detik < 0) {
-    //             detik = 59;
-    //             menit--;
+            /** Jika var detik < 0
+             * var detik akan dikembalikan ke 59
+             * Menit akan Berkurang 1
+             */
+            if (detik < 0) {
+                detik = 59;
+                menit--;
 
-    //             /** Jika menit < 0
-    //              * Maka menit akan dikembali ke 59
-    //              * Jam akan Berkurang 1
-    //              */
-    //             if (menit < 0) {
-    //                 menit = 59;
-    //                 jam--;
+                /** Jika menit < 0
+                 * Maka menit akan dikembali ke 59
+                 * Jam akan Berkurang 1
+                 */
+                if (menit < 0) {
+                    menit = 59;
+                    jam--;
 
-    //                 /** Jika var jam < 0
-    //                  * clearInterval() Memberhentikan Interval dan submit secara otomatis
-    //                  */
+                    /** Jika var jam < 0
+                     * clearInterval() Memberhentikan Interval dan submit secara otomatis
+                     */
 
-    //                 if (jam < 0) {
-    //                     clearInterval(hitung);
-    //                     /** Variable yang digunakan untuk submit secara otomatis di Form */
-    //                     var frmSoal = document.getElementById("clock");
-    //                     window.location.href =
-    //                         "<?php echo $urlConfig . 'soal?timeout&tes_id=' . $_GET['tes_id'] . '&username=' . $username ?>";
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     /** Menjalankan Function Hitung Waktu Mundur */
-    //     hitung();
-    // });
-
-    // $(document).on('click', '#endexam2', function(e) {
-    //     e.preventDefault();
-    //     const swalWithBootstrapButtons = Swal.mixin({
-    //         customClass: {
-    //             confirmButton: "btn btn-success",
-    //             cancelButton: "btn btn-danger",
-    //         },
-    //         buttonsStyling: false,
-    //     });
-
-    //     swalWithBootstrapButtons
-    //         .fire({
-    //             title: "Akhiri Ujian?",
-    //             text: "Apakah anda yakin ingin mengakhiri ujian",
-    //             icon: "warning",
-    //             showCancelButton: true,
-    //             confirmButtonText: "Akhiri Ujian",
-    //             cancelButtonText: "Batalkan",
-    //             reverseButtons: true,
-    //         })
-    //         .then((result) => {
-    //             if (result.isConfirmed) {
-    //                 Swal.fire({
-    //                     icon: 'success',
-    //                     title: 'Terima Kasih',
-    //                     text: 'Ujian anda telah disimpan',
-    //                 }).then(function() {
-    //                     $('#formquiz').submit();
-    //                 })
-    //             }
-    //         });
-    // });
-
+                    if (jam < 0) {
+                        clearInterval(hitung);
+                        /** Variable yang digunakan untuk submit secara otomatis di Form */
+                        var frmSoal = document.getElementById("clock");
+                        window.location.href =
+                            "<?php echo $urlConfig . 'soal?timeout&tes_id=' . $_GET['tes_id'] . '&username=' . $username ?>";
+                    }
+                }
+            }
+        }
+        /** Menjalankan Function Hitung Waktu Mundur */
+        hitung();
+    });
 
 
     document.getElementById("endExam");
